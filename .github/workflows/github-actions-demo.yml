@@ -1,5 +1,5 @@
 name: GitHub Actions Demo
-run-name: hi github actions is testing out GitHub Actions 🚀
+run-name: ${{ github.MY_TEST_SECRET }} is testing out GitHub Actions 🚀
 on:
   push:
     branches:
