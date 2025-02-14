@@ -7,7 +7,7 @@
     "emitDeclarationOnly": false,
     "esModuleInterop": true,
     "module": "esnext",
-    "moduleResolution": "bundler",
+    "moduleResolution": "node10",
     "resolveJsonModule": true,
     "isolatedModules": true,
     "lib": ["dom", "dom.iterable", "esnext"],
@@ -22,14 +22,6 @@
     ],
     "types": ["jest", "node"]
   },
-  "include": [
-    "**/*.ts",
-    "**/*.tsx",
-    "**/*.js",
-    "**/*.jsx",
-    "../../apps/weather/.next/types/**/*.ts",
-    "../../dist/apps/weather/.next/types/**/*.ts",
-    "next-env.d.ts"
-  ],
+  "include": ["**/*.js", "**/*.jsx", "**/*.ts", "**/*.tsx", "../../apps/weather/.next/types/**/*.ts", "../../dist/apps/weather/.next/types/**/*.ts", "next-env.d.ts", ".next/types/**/*.ts"],
   "exclude": ["node_modules", "jest.config.ts", "**/*.spec.ts", "**/*.test.ts"]
 }

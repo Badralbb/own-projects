@@ -1,3 +1,4 @@
+/* eslint-disable*/
 export default {
   displayName: 'weather',
   preset: '../../jest.preset.js',
@@ -7,4 +8,9 @@ export default {
   },
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
   coverageDirectory: '../../coverage/apps/weather',
+  collectCoverageFrom: [
+    'src/**/*.{tsx,ts,js,jsx}',
+    '!src/components/providers/*.{tsx,ts,js,jsx}',
+    '!src/app/**/*.tsx',
+  ],
 };

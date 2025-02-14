@@ -1,40 +1,59 @@
 import nx from '@nx/eslint-plugin';
+import unicorn from 'eslint-plugin-unicorn';
+import typescriptEslint from '@typescript-eslint/eslint-plugin';
+import tsParser from '@typescript-eslint/parser';
 
 export default [
-  ...nx.configs['flat/base'],
-  ...nx.configs['flat/typescript'],
-  ...nx.configs['flat/javascript'],
   {
-    ignores: ['**/dist'],
+    ignores: ['.next/**/*'],
   },
   {
-    files: ['**/*.ts', '**/*.tsx', '**/*.js', '**/*.jsx'],
+    plugins: {
+      '@nx': nx,
+      unicorn,
+      '@typescript-eslint': typescriptEslint,
+    },
+
+    languageOptions: {
+      parser: tsParser,
+    },
+  },
+  {
+    files: ['**/*.spec.ts', '**/*.spec.tsx', '**/*.cy.ts', '**/*.cy.tsx'],
+
     rules: {
-      '@nx/enforce-module-boundaries': [
+      'unicorn/filename-case': [
         'error',
         {
-          enforceBuildableLibDependency: true,
-          allow: ['^.*/eslint(\\.base)?\\.config\\.[cm]?js$'],
-          depConstraints: [
-            {
-              sourceTag: '*',
-              onlyDependOnLibsWithTags: ['*'],
-            },
-          ],
+          case: 'kebabCase',
         },
       ],
     },
   },
   {
-    files: [
-      '**/*.ts',
-      '**/*.tsx',
-      '**/*.js',
-      '**/*.jsx',
-      '**/*.cjs',
-      '**/*.mjs',
-    ],
-    // Override or add rules here
-    rules: {},
+    files: ['**/*.ts', '**/*.tsx', '**/*/.jsx'],
+    rules: {
+      complexity: ['error', 5],
+      'max-lines': ['error', { max: 200, skipBlankLines: true, skipComments: true }],
+    },
+  },
+  {
+    files: ['**/*.jsx', '**/*.tsx', '**/layout.tsx'],
+    ignores: ['**/layout.tsx'],
+    rules: {
+      'unicorn/filename-case': [
+        'error',
+        {
+          case: 'camelCase',
+        },
+      ],
+      'react/function-component-definition': [
+        'error',
+        {
+          namedComponents: 'arrow-function',
+          unnamedComponents: 'arrow-function',
+        },
+      ],
+    },
   },
 ];
